@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/kgPubService.umd.js"
+      }
+    },
+    "condition": {
+      "urlFilter": "kgPubService.umd.js",
+      "resourceTypes": ["script"]
+    }
+  }
+]
