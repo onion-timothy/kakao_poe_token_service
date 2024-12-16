@@ -1,0 +1,18 @@
+{
+  "name": "kakao_poe_token_service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "steam-binary-vdf": "^0.1.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Service to parse VDF files and manage tokens"
+}
