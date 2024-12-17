@@ -1,8 +1,8 @@
 # Kakao POE2 Token Service for Steam Deck
 
 Node.JS를 사용한 Kakao POE2 토큰 설정 서비스입니다.  
-크롬 익스텐션에서 API를 호출하면, LaunchOptions를 수정하고 스팀을 재시작합니다.  
-비 스팀 게임으로 POE 2가 설치되어야 합니다.  
+크롬 익스텐션에서 Node.JS 서버의 API를 호출하면, LaunchOptions를 수정하고 스팀을 재시작합니다.  
+먼저 비 스팀 게임으로 POE 2가 설치되어야 합니다.  
 설치 가이드는 아래의 글을 참조 바랍니다.  
 https://gall.dcinside.com/mgallery/board/view/?id=steamdeck&no=130911&exception_mode=recommend&page=1  
 
@@ -29,7 +29,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 ```
 설치 이후, Konsole을 닫은 후 다시 열고 아래의 단계를 진행합니다.
 
-### NodeJS 설치
+### Node.JS 설치
 ```sh
 nvm install --lts
 ```
@@ -60,9 +60,6 @@ Node.JS 서버가 Gamescope 세션 및 Deck 재시작 이후에도 동작하게 
 sudo nano /etc/systemd/system/kakao_poe_token.service
 ```
 
-`/home/deck/.nvm/versions/node/v22.12.0/bin/node` 은 위에서 확인한 Node.JS 실행 경로로,  
-`/home/deck/Downloads/kakao_poe_token_service-main/kakao_poe_token_service` 은 프로젝트 다운로드 경로로 설정합니다.  
-
 ```nano
 [Unit]
 Description=Kakao POE Token Service
@@ -77,6 +74,8 @@ User=deck
 [Install]
 WantedBy=multi-user.target
 ```
+`/home/deck/.nvm/versions/node/v22.12.0/bin/node` 은 위에서 확인한 Node.JS 실행 경로로,  
+`/home/deck/Downloads/kakao_poe_token_service-main/kakao_poe_token_service` 은 프로젝트 다운로드 경로로 설정합니다.  
 
 ### Steam User 설정
 프로젝트의 `/kakao_poe_token_service/src/config.json` 파일에 사용자 번호를 입력해야 합니다.  
@@ -105,7 +104,8 @@ sudo systemctl enable kakao_poe_token
 ```sh
 sudo systemctl status kakao_poe_token
 ```
-서비스가 정상적으로 구동되면 아래와 같이 표시됩니다.
+서비스가 정상적으로 구동되면 아래와 같이 표시됩니다.  
+세부 내용(PID, 경로 등)은 다를 수 있으며, Active: active (running) 을 확인하면 됩니다.
 ```sh
 ● kakao_poe_token_service - Kakao POE Token Service
      Loaded: loaded (/etc/systemd/system/kakao_poe_token_service; enabled; preset: disabled)
@@ -123,3 +123,16 @@ Dec 16 17:16:16 steamdeck assert_20241216171615_4.dmp[153462]: Finished uploadin
 Dec 16 17:16:16 steamdeck assert_20241216171615_4.dmp[153462]: response: CrashID=bp-c67703aa-f690-40ef-a8bc-291da2241216
 Dec 16 17:16:16 steamdeck assert_20241216171615_4.dmp[153462]: file ''/tmp/dumps/assert_202412161716154.dmp'', upload yes: ''CrashID=bp-c67703aa-f690-40_4.dmp'', upload yes: ''CrashID=bp-c67703aa-f690-40ef-a8bc-291da2241216''
 ```
+
+### Chrome Extension 설치
+프로젝트의 `chrome_extension` 을 Chrome에 설치합니다.  
+`chrome_extension`은 카카오 POE 2 실행 페이지의 스크립트를 교체하여, Node.JS 서버에 생성된 토큰을 전달하는 역할을 합니다.  
+설치 절차는 아래와 같습니다.
+
+1. `chrome://extensions` 실행
+2. 개발자 모드 활성화
+3. 압축 해제된 확장 프로그램 로드
+
+### 사용 방법
+POE2 카카오 페이지에 접속 후, 로그인 등 인증 후에 `지금 플레이` 버튼을 클릭합니다.  
+동작에 성공하면 스팀이 재시작됩니다. 이후 POE2를 플레이할 수 있습니다.
