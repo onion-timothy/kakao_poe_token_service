@@ -53,6 +53,16 @@ cd /home/deck/Downloads/kakao_poe_token_service-main/kakao_poe_token_service/
 /home/deck/.nvm/versions/node/v22.12.0/bin/npm install
 ```
 
+### Steam User 설정
+프로젝트의 `/kakao_poe_token_service/src/config.json` 파일에 사용자 번호를 입력해야 합니다.  
+아래의 경로로 이동하여 번호를 확인할 수 있습니다.  
+```sh
+cd /home/deck/.steam/steam/userdata
+```
+```sh
+ls
+```
+
 ### 서비스 등록
 Node.JS 서버가 Gamescope 세션 및 Deck 재시작 이후에도 동작하게 하기 위해 서비스 등록이 필요합니다.  
 서비스는 아래의 절차를 통해 등록할 수 있습니다.  
@@ -76,16 +86,6 @@ WantedBy=multi-user.target
 ```
 `/home/deck/.nvm/versions/node/v22.12.0/bin/node` 은 위에서 확인한 Node.JS 실행 경로로,  
 `/home/deck/Downloads/kakao_poe_token_service-main/kakao_poe_token_service` 은 프로젝트 다운로드 경로로 설정합니다.  
-
-### Steam User 설정
-프로젝트의 `/kakao_poe_token_service/src/config.json` 파일에 사용자 번호를 입력해야 합니다.  
-아래의 경로로 이동하여 번호를 확인할 수 있습니다.  
-```sh
-cd /home/deck/.steam/steam/userdata
-```
-```sh
-ls
-```
 
 서비스 파일 설정 이후, 아래의 명령어를 실행하여 활성화합니다.
 1. 시스템 서비스 등록
