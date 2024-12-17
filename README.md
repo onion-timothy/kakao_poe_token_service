@@ -43,7 +43,7 @@ nvm which current
 /home/deck/.nvm/versions/node/v22.12.0/bin/node
 ```
 
-### Kakao POE2 Token Service install
+### Kakao POE2 Token Service project install
 프로젝트를 다운로드 받은 경로로 이동합니다. `/home/deck/Downloads` 폴더에 그대로 있다면, 아래와 같습니다.
 ```sh
 cd /home/deck/Downloads/kakao_poe_token_service-main/kakao_poe_token_service/
